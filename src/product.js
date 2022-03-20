@@ -69,7 +69,7 @@ const product = async (query) => {
   }
   ///umesh code start
 var specs = [];
-      var specsDetails = product_page.split('class="a-keyvalue prodDetTable" role="presentation">')[1].split('</table>');
+      var specsDetails = product_page.split('prodDetTable" role="presentation">')[1].split('</table>');
       for (var i = 1; i < specsDetails.length; i++) {
                       try {
                           var specsTable = specsDetails[i].split('</tr>')
@@ -84,9 +84,13 @@ var specs = [];
                                   if (property != null && property != "" && propertyValue.split("<").length == 1 && propertyValue != "") {
                                     specs[property] = propertyValue;
                                   }
-                              } catch (e) { }
+                              } catch (e) {
+                              console.log(e);
+                              }
                           }
-                      } catch (e) { }
+                      } catch (e) {
+                      console.log(e);
+                      }
                   }
 
   try {
