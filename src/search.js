@@ -128,8 +128,8 @@ export default async function searchProducts(query, host) {
                 .replace("₹", "")
                 .trim()
             ),
-            product_link,
-            query_url: cleanURL(product_link.replace("www.amazon.in", host + "/product")),
+            cleanURL(product_link),
+            query_url: cleanURL(product_link).replace("www.amazon.in", host + "/product"),
           });
         }
       } catch (err) {}
