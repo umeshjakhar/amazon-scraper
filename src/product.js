@@ -68,7 +68,24 @@ const product = async (query) => {
     var in_stock = product_page.split("In stock.").length > 1;
   }
   ///umesh code start
-  var specs = [];
+var specs = [];
+
+  try {
+      var spec = product_page
+        .split('<table id="productDetails_techSpec_section_1" class="a-keyvalue prodDetTable" role="presentation">')[1]
+        .split("</table>")[0];
+      var keyPart = spec.split('<th class="a-color-secondary a-size-base prodDetSectionEntry">');
+      var valuePart = spec.split('<td class="a-size-base prodDetAttrValue">');
+      for (var i = 1; i < spec.length; i++) {
+        try {
+          specs.push({fixText(keyPart[i].split("</th>")[0]): fixText(valuePart[i].split("</td>")[0])});
+
+        } catch (err) {}
+      }
+    } catch (err) {
+      var features = [null];
+    }
+
   try {
       var key =
         product_page
