@@ -72,8 +72,7 @@ var specs = [];
 
   try {
       var spec = product_page
-        .split(/<table id="productDetails_techSpec_section_1" class="a-keyvalue prodDetTable" role="presentation">/g)[1]
-        .split(/</table>/g)[0];
+        .split(/<table id="productDetails_techSpec_section_1" class="a-keyvalue prodDetTable" role="presentation">/g)[1].split(/</table>/g)[0];
       var keyPart = spec.split(/<th class="a-color-secondary a-size-base prodDetSectionEntry">/g);
       var valuePart = spec.split(/<td class="a-size-base prodDetAttrValue">/g);
       for (var i = 1; i < spec.length; i++) {
@@ -86,21 +85,21 @@ var specs = [];
 
     }
 
-    try {
-          var spec = product_page
-            .split(/<table id="productDetails_techSpec_section_2" class="a-keyvalue prodDetTable" role="presentation">/g)[1]
-            .split(/</table>/g)[0];
-          var keyPart = spec.split(/<th class="a-color-secondary a-size-base prodDetSectionEntry">/g);
-          var valuePart = spec.split(/<td class="a-size-base prodDetAttrValue">/g);
-          for (var i = 1; i < spec.length; i++) {
-            try {
-              specs.push({fixText(keyPart[i].split(/</th>/g)[0]): fixText(valuePart[i].split(/</td>/g)[0])});
-
-            } catch (err) {}
-          }
-        } catch (err) {
-          var features = [null];
-        }
+//    try {
+//          var spec = product_page
+//            .split(/<table id="productDetails_techSpec_section_2" class="a-keyvalue prodDetTable" role="presentation">/g)[1]
+//            .split(/</table>/g)[0];
+//          var keyPart = spec.split(/<th class="a-color-secondary a-size-base prodDetSectionEntry">/g);
+//          var valuePart = spec.split(/<td class="a-size-base prodDetAttrValue">/g);
+//          for (var i = 1; i < spec.length; i++) {
+//            try {
+//              specs.push({fixText(keyPart[i].split(/</th>/g)[0]): fixText(valuePart[i].split(/</td>/g)[0])});
+//
+//            } catch (err) {}
+//          }
+//        } catch (err) {
+//          var features = [null];
+//        }
 
 
   try {
