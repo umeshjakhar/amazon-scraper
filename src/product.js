@@ -160,15 +160,18 @@ const product = async (query) => {
   } catch (err) {
     var product_detail = null;
   }
+ return JSON.stringify(specs);
 
-  return JSON.stringify(
-    {
-      status: true,
-      query,
-      fetch_from: `https://www.amazon.in/${query}`,
-      result:specs,
-    }
-  );
+//  return JSON.stringify(
+//    {
+//      status: true,
+//      query,
+//      fetch_from: `https://www.amazon.in/${query}`,
+//      product_detail,
+//    },
+//    null,
+//    2
+//  );
 };
 
 const lastEntry = (array) => array[array.length - 1];
