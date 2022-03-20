@@ -129,7 +129,7 @@ export default async function searchProducts(query, host) {
                 .trim()
             ),
             product_link,
-            query_url: product_link.replace("www.amazon.in", host + "/product"),
+            query_url: cleanURL(product_link.replace("www.amazon.in", host + "/product")),
           });
         }
       } catch (err) {}
@@ -147,4 +147,14 @@ export default async function searchProducts(query, host) {
     null,
     2
   );
+
+}
+const cleanURL = (url) => {
+    // delete useless parameters from product page url
+    url = new URL(url)
+    url.searchParams.delete('_appId')
+    url.searchParams.delete('pid')
+    url.searchParams.delete('_refId')
+    url.searchParams.delete('ref')
+    return url.toString()
 }
