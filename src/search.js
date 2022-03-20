@@ -5,7 +5,7 @@ export default async function searchProducts(query, host) {
   const searchQuery = query.replace(/%20/gi, "+");
   var searchURL = `https://www.amazon.in/s?k=${searchQuery}`;
   if(Number.isInteger(Number.parseInt(query))){
-  searchURL = `https://www.amazon.in/s?i=electronics&rh=n%3A1805560031&s=date-desc-rank&fs=true&page=${query}&ref=sr_pg_${query}`;
+  searchURL = `https://www.amazon.in/s?k=smartphones&i=electronics&rh=n%3A1805560031&page=${query}&qid=1647778056&ref=sr_pg_${query}`;
   }
   const searchRes = await (
     await fetch(searchURL)
