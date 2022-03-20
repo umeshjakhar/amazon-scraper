@@ -69,36 +69,25 @@ const product = async (query) => {
   }
   ///umesh code start
 var specs = [];
+      var specsDetails = product_page.split('class="a-keyvalue prodDetTable" role="presentation">')[1].split('</table>');
+      for (var i = 1; i < specsDetails.length; i++) {
+                      try {
+                          var specsTable = specsDetails[i].split('</tr>')
+                          var k;
+                          for (k = 1; k < specsTable.length; k = k + 1) {
+                              try {
+                                  var keyPart = specsTable[k - 1].split('</th>')[0].split('<th class="a-color-secondary a-size-base prodDetSectionEntry">')[1];
+                                  var valuePart = specsTable[k - 1].split('</td>')[0].split('<td class="a-size-base prodDetAttrValue">')[1];
+                                  var property = keyPart.trim();
+                                  var propertyValue = valuePart.trim();
 
-  try {
-      var spec = product_page.split('<table id="productDetails_techSpec_section_1" class="a-keyvalue prodDetTable" role="presentation">')[1].split('</table>')[0];
-      var keyPart = spec.split('<th class="a-color-secondary a-size-base prodDetSectionEntry">');
-      var valuePart = spec.split('<td class="a-size-base prodDetAttrValue">');
-      for (var i = 1; i < spec.length; i++) {
-        try {
-          specs.push({fixText(keyPart[i].split('</th>')[0]): fixText(valuePart[i].split('</td>')[0])});
-
-        } catch (err) {}
-      }
-    } catch (err) {
-
-    }
-
-    try {
-          var spec = product_page.split('<table id="productDetails_techSpec_section_2" class="a-keyvalue prodDetTable" role="presentation">')[1].split('</table>')[0];
-          var keyPart = spec.split('<th class="a-color-secondary a-size-base prodDetSectionEntry">');
-          var valuePart = spec.split('<td class="a-size-base prodDetAttrValue">');
-          for (var i = 1; i < spec.length; i++) {
-            try {
-              specs.push({fixText(keyPart[i].split('</th>')[0]): fixText(valuePart[i].split('</td>')[0])});
-
-            } catch (err) {}
-          }
-        } catch (err) {
-
-        }
-
-
+                                  if (property != null && property != "" && propertyValue.split("<").length == 1 && propertyValue != "") {
+                                    specs[property] = propertyValue;
+                                  }
+                              } catch (e) { }
+                          }
+                      } catch (e) { }
+                  }
 
   try {
     var image = product_page
