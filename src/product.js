@@ -67,6 +67,20 @@ const product = async (query) => {
   } catch (e) {
     var in_stock = product_page.split("In stock.").length > 1;
   }
+  ///umesh code start
+  var specs = [];
+  try {
+      var key =
+        product_page
+          .split('prodDetSectionEntry">')[1]
+          .split("</th>")[0];
+      var value = product_page
+                            .split('prodDetAttrValue">')[1]
+                            .split("</td>")[0];
+      specs[key]=value;
+    } catch (e) {
+
+    }
 
   try {
     var image = product_page
@@ -130,7 +144,8 @@ const product = async (query) => {
       status: true,
       query,
       fetch_from: `https://www.amazon.in/${query}`,
-      product_detail,
+//      product_detail,
+        specs,
     },
     null,
     2
