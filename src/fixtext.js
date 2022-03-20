@@ -6,6 +6,7 @@ export default function fixText(str) {
       .replace(/&amp;/gi, "&")
       .replace(/&quot;/gi, "'")
       .replace(/&#x27;/gi, "'")
+      .replace(/&lrm;/gi,"")
       .trim();
   } catch (error) {
     console.log("fixtexterror =>", error);

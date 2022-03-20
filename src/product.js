@@ -68,21 +68,28 @@ const product = async (query) => {
     var in_stock = product_page.split("In stock.").length > 1;
   }
   ///umesh code start
-var specs = [];
-      var specsDetails = product_page.split('prodDetTable" role="presentation">')[1].split('</table>');
+  var specs = {};
+  try {
+      var specsDetails = product_page.split('prodDetTable" role="presentation">');
+
       for (var i = 1; i < specsDetails.length; i++) {
+
                       try {
                           var specsTable = specsDetails[i].split('</tr>')
-                          var k;
-                          for (k = 1; k < specsTable.length; k = k + 1) {
-                              try {
-                                  var keyPart = specsTable[k - 1].split('</th>')[0].split('<th class="a-color-secondary a-size-base prodDetSectionEntry">')[1];
-                                  var valuePart = specsTable[k - 1].split('</td>')[0].split('<td class="a-size-base prodDetAttrValue">')[1];
-                                  var property = keyPart.trim();
-                                  var propertyValue = valuePart.trim();
 
-                                  if (property != null && property != "" && propertyValue.split("<").length == 1 && propertyValue != "") {
+                          var k;
+                          for (k = 0; k < specsTable.length; k++) {
+                              try {
+                                  var keyPart = specsTable[k].split('prodDetSectionEntry">')[1].split('</th>')[0];
+                                  var valuePart = specsTable[k].split('prodDetAttrValue">')[1].split('</td>')[0];
+                                  var property = fixText(keyPart).trim();
+                                  var propertyValue = fixText(valuePart).trim();
+
+
+                                  if (property != undefined && property != null && property != "" && propertyValue != "") {
                                     specs[property] = propertyValue;
+
+
                                   }
                               } catch (e) {
                               console.log(e);
@@ -92,6 +99,10 @@ var specs = [];
                       console.log(e);
                       }
                   }
+      }
+  catch {
+
+      }
 
   try {
     var image = product_page
@@ -149,18 +160,18 @@ var specs = [];
   } catch (err) {
     var product_detail = null;
   }
+ return JSON.stringify(specs);
 
-  return JSON.stringify(
-    {
-      status: true,
-      query,
-      fetch_from: `https://www.amazon.in/${query}`,
+//  return JSON.stringify(
+//    {
+//      status: true,
+//      query,
+//      fetch_from: `https://www.amazon.in/${query}`,
 //      product_detail,
-        specs,
-    },
-    null,
-    2
-  );
+//    },
+//    null,
+//    2
+//  );
 };
 
 const lastEntry = (array) => array[array.length - 1];
