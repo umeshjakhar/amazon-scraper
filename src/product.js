@@ -175,5 +175,13 @@ const product = async (query) => {
 };
 
 const lastEntry = (array) => array[array.length - 1];
-
+const cleanURL = (url) => {
+    // delete useless parameters from product page url
+    url = new URL(url)
+    url.searchParams.delete('_appId')
+    url.searchParams.delete('pid')
+    url.searchParams.delete('_refId')
+    url.searchParams.delete('ref')
+    return url.toString()
+}
 export default product;

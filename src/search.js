@@ -30,6 +30,7 @@ export default async function searchProducts(query, host) {
 
       if (product_link.includes("?")) {
         product_link = product_link.split("?")[0];
+
       }
 
       if (!product_link.includes("/gp/slredirect/")) {
@@ -67,7 +68,7 @@ export default async function searchProducts(query, host) {
               .trim()
           ),
           product_link,
-          query_url: product_link.replace("www.amazon.in", host + "/product"),
+          query_url: product_link.replace("www.amazon.in", host + "/product").replace("/ref=",""),
         });
       }
     } catch (err) {
@@ -128,8 +129,8 @@ export default async function searchProducts(query, host) {
                 .replace("₹", "")
                 .trim()
             ),
-            cleanURL(product_link),
-            query_url: cleanURL(product_link).replace("www.amazon.in", host + "/product"),
+            product_link,
+            query_url: product_link.replace("www.amazon.in", host + "/product").replace("/ref=",""),
           });
         }
       } catch (err) {}
@@ -148,13 +149,4 @@ export default async function searchProducts(query, host) {
     2
   );
 
-}
-const cleanURL = (url) => {
-    // delete useless parameters from product page url
-    url = new URL(url)
-    url.searchParams.delete('_appId')
-    url.searchParams.delete('pid')
-    url.searchParams.delete('_refId')
-    url.searchParams.delete('ref')
-    return url.toString()
 }
