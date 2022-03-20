@@ -68,7 +68,7 @@ export default async function searchProducts(query, host) {
               .trim()
           ),
           product_link,
-          query_url: product_link.replace("www.amazon.in", host + "/product").replace("/ref=",""),
+          query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
         });
       }
     } catch (err) {
@@ -130,7 +130,7 @@ export default async function searchProducts(query, host) {
                 .trim()
             ),
             product_link,
-            query_url: product_link.replace("www.amazon.in", host + "/product").replace("/ref=",""),
+            query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
           });
         }
       } catch (err) {}
