@@ -1,9 +1,14 @@
 import fixText from "./fixtext";
 
 export default async function searchProducts(query, host) {
+
   const searchQuery = query.replace(/%20/gi, "+");
+  var searchURL = `https://www.amazon.in/s?k=${searchQuery}`;
+  if(Number.isInteger(Number.parseInt(query))){
+  searchURL = `https://www.amazon.in/s?i=electronics&rh=n%3A1805560031&s=date-desc-rank&fs=true&page=${query}&ref=sr_pg_${query}`;
+  }
   const searchRes = await (
-    await fetch(`https://www.amazon.in/s?k=${searchQuery}`)
+    await fetch(searchURL)
   ).text();
 
   var all_product = searchRes.split(
@@ -136,7 +141,7 @@ export default async function searchProducts(query, host) {
       status: true,
       total_result: result.length,
       query: searchQuery,
-      fetch_from: `https://www.amazon.in/s?k=${searchQuery}`,
+      fetch_from: searchURL,
       result,
     },
     null,
