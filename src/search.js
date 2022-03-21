@@ -158,7 +158,7 @@ export default async function searchProducts(query, host) {
       total_result: result.length,
       query: searchQuery,
       fetch_from: searchURL,
-      specs,
+      result,
     },
     null,
     2
