@@ -42,6 +42,7 @@ export default async function searchProducts(query, host) {
         var path = new URL(product_link.replace("www.amazon.in","").split("/ref=")[0]).pathname;
         path = "@@@"+path;
         var specs= await product(path.replace("@@@/",""));
+        specs = JSON.parse(specs);
         result.push({
           name: fixText(
             all_product[i]
@@ -109,6 +110,7 @@ export default async function searchProducts(query, host) {
                 var path = new URL(product_link.replace("www.amazon.in","").split("/ref=")[0]).pathname;
                path = "@@@"+path;
                var specs= await product(path.replace("@@@/",""));
+               specs = JSON.parse(specs);
           result.push({
             name: fixText(
               all_product[i]
