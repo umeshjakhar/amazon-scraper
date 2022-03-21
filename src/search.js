@@ -37,7 +37,11 @@ export default async function searchProducts(query, host) {
 
       if (!product_link.includes("/gp/slredirect/")) {
         /* Not including sponsered products */
-        var specs= await product(product_link.replace("www.amazon.in","").split("/ref=")[0]);
+
+
+        var path = new URL(product_link.replace("www.amazon.in","").split("/ref=")[0]).pathname;
+        path = "@@@"+path;
+        var specs= await product(path.replace("@@@/",""));
         result.push({
           name: fixText(
             all_product[i]
@@ -102,7 +106,9 @@ export default async function searchProducts(query, host) {
         }
 
         if (!product_link.includes("/gp/slredirect/")) {
-        var specs= await product(product_link.replace("www.amazon.in","").split("/ref=")[0]);
+                var path = new URL(product_link.replace("www.amazon.in","").split("/ref=")[0]).pathname;
+               path = "@@@"+path;
+               var specs= await product(path.replace("@@@/",""));
           result.push({
             name: fixText(
               all_product[i]
