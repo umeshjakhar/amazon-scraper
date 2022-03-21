@@ -37,6 +37,7 @@ export default async function searchProducts(query, host) {
 
       if (!product_link.includes("/gp/slredirect/")) {
         /* Not including sponsered products */
+        var specs= await product(product_link.replace("www.amazon.in","").split("/ref=")[0]);
         result.push({
           name: fixText(
             all_product[i]
@@ -71,7 +72,7 @@ export default async function searchProducts(query, host) {
           ),
           product_link,
           query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
-          specs : await (await fetch(product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0])).text(),
+          specs : specs,
         });
 
       }
@@ -101,6 +102,7 @@ export default async function searchProducts(query, host) {
         }
 
         if (!product_link.includes("/gp/slredirect/")) {
+        var specs= await product(product_link.replace("www.amazon.in","").split("/ref=")[0]);
           result.push({
             name: fixText(
               all_product[i]
@@ -135,7 +137,7 @@ export default async function searchProducts(query, host) {
             ),
             product_link,
             query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
-            specs : await (await fetch(product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0])).text(),
+            specs : specs,
           });
         }
       } catch (err) {}
