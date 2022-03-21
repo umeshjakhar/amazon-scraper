@@ -1,8 +1,10 @@
 import fixText from "./fixtext";
+import product from "./product";
 
 export default async function searchProducts(query, host) {
 
   const searchQuery = query.replace(/%20/gi, "+");
+  var specsUrl;
   var searchURL = `https://www.amazon.in/s?k=${searchQuery}`;
   if(Number.isInteger(Number.parseInt(query))){
   searchURL = `https://www.amazon.in/s?k=smartphones&i=electronics&rh=n%3A1805560031&page=${query}&qid=1647778056&ref=sr_pg_${query}`;
@@ -69,7 +71,9 @@ export default async function searchProducts(query, host) {
           ),
           product_link,
           query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
+          specs : await (await fetch(product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0])).text(),
         });
+
       }
     } catch (err) {
       console.log(err);
@@ -131,6 +135,7 @@ export default async function searchProducts(query, host) {
             ),
             product_link,
             query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
+            specs : await (await fetch(product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0])).text(),
           });
         }
       } catch (err) {}
