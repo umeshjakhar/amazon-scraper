@@ -43,7 +43,7 @@ export default async function searchProducts(query, host) {
         path = "@@@"+path;
         var specs= await product(path.replace("@@@/",""));
         specs = JSON.parse(specs);
-        specs.push({
+        result.push({
           name: fixText(
             all_product[i]
               .split(
@@ -77,6 +77,7 @@ export default async function searchProducts(query, host) {
           ),
           product_link,
           query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
+          ...specs
         });
 
       }
@@ -110,7 +111,7 @@ export default async function searchProducts(query, host) {
                path = "@@@"+path;
                var specs= await product(path.replace("@@@/",""));
                specs = JSON.parse(specs);
-          specs.push({
+          result.push({
             name: fixText(
               all_product[i]
                 .split(
@@ -144,6 +145,7 @@ export default async function searchProducts(query, host) {
             ),
             product_link,
             query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
+            ...specs
           });
         }
       } catch (err) {}
