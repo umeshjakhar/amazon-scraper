@@ -156,11 +156,11 @@ export default async function searchProducts(query, host) {
 
   return jsonfeedToRSS(JSON.stringify(
     {
-      status: true,
-      total_result: result.length,
-      query: searchQuery,
-      fetch_from: searchURL,
-      "version":"https://jsonfeed.org/version/1",
+//      status: true,
+//      total_result: ,
+//      query: searchQuery,
+//      fetch_from: searchURL,
+        "version":"https://jsonfeed.org/version/1",
         "title":"Amazon Scraper",
         "home_page_url":"https://amazon-scraper.umeshjakhar.workers.dev/",
         "feed_url":"https://amazon-scraper.umeshjakhar.workers.dev/search/",
