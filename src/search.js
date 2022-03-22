@@ -178,8 +178,9 @@ export default async function searchProducts(query, host) {
 //        }
 //    );
 const config = {
+    header:true,
     indent: '    '
 };
 
-  return toXML(specs, config)
+  return toXML(result, config)
 }
