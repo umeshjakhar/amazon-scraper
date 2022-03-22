@@ -46,7 +46,7 @@ export default async function searchProducts(query, host) {
         var specs= await product(path.replace("@@@/",""));
         specs = JSON.parse(specs);
         result.push({
-          name: fixText(
+          title: fixText(
             all_product[i]
               .split(
                 '<span class="a-size-medium a-color-base a-text-normal">'
@@ -77,7 +77,7 @@ export default async function searchProducts(query, host) {
               .replace("₹", "")
               .trim()
           ),
-          product_link,
+          link,
           query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
           ...specs
         });
@@ -115,7 +115,7 @@ export default async function searchProducts(query, host) {
                var specs= await product(path.replace("@@@/",""));
                specs = JSON.parse(specs);
           result.push({
-            name: fixText(
+            title: fixText(
               all_product[i]
                 .split(
                   '<span class="a-size-base-plus a-color-base a-text-normal">'
@@ -146,7 +146,7 @@ export default async function searchProducts(query, host) {
                 .replace("₹", "")
                 .trim()
             ),
-            product_link,
+            link,
             query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
             ...specs
           });
