@@ -166,6 +166,7 @@ export default async function searchProducts(query, host) {
 //        )
 //    );
 
+
 var res2 = jsonfeedToRSS(
         {
             version: "https://jsonfeed.org/version/1",
