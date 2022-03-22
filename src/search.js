@@ -1,7 +1,5 @@
 import fixText from "./fixtext";
 import product from "./product";
-//const jsonfeedToRSS = require('jsonfeed-to-rss');
-import { toXML } from 'jstoxml';
 
 export default async function searchProducts(query, host) {
 
@@ -22,7 +20,6 @@ export default async function searchProducts(query, host) {
   var i,
     result = [];
   for (i = 1; i < all_product.length; i++) {
-//for (i = 1; i < 2; i++) {
     /* (type 1) */
     try {
       var product_link =
@@ -47,7 +44,7 @@ export default async function searchProducts(query, host) {
         var specs= await product(path.replace("@@@/",""));
         specs = JSON.parse(specs);
         result.push({
-          title: fixText(
+          name: fixText(
             all_product[i]
               .split(
                 '<span class="a-size-medium a-color-base a-text-normal">'
@@ -78,7 +75,7 @@ export default async function searchProducts(query, host) {
               .replace("₹", "")
               .trim()
           ),
-          link,
+          product_link,
           query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
           ...specs
         });
@@ -96,7 +93,6 @@ export default async function searchProducts(query, host) {
     );
 
     for (i = 1; i < all_product.length; i++) {
-//    for (i = 1; i < 2; i++) {
       try {
         var product_link =
           "https://www.amazon.in" +
@@ -116,7 +112,7 @@ export default async function searchProducts(query, host) {
                var specs= await product(path.replace("@@@/",""));
                specs = JSON.parse(specs);
           result.push({
-            title: fixText(
+            name: fixText(
               all_product[i]
                 .split(
                   '<span class="a-size-base-plus a-color-base a-text-normal">'
@@ -147,7 +143,7 @@ export default async function searchProducts(query, host) {
                 .replace("₹", "")
                 .trim()
             ),
-            link,
+            product_link,
             query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
             ...specs
           });
@@ -155,32 +151,15 @@ export default async function searchProducts(query, host) {
       } catch (err) {}
     }
   }
-//var res1 = jsonfeedToRSS(
-//JSON.stringify(
-//        {
-//            version: "https://jsonfeed.org/version/1",
-//            title: "My Amazon Mobile Feed",
-//            home_page_url: searchURL,
-//            feed_url: searchQuery,
-//            items: result
-//        }
-//        )
-//    );
 
-const config = {
-    indent: '    '
-};
-var res2 = toXML(
+var res1 = JSON.stringify(
         {
-            version: "https://jsonfeed.org/version/1",
-            title: "My Amazon Mobile Feed",
-            home_page_url: searchURL,
-            feed_url: searchQuery,
-            items: result
-        },
-        config
-    );
-
-
-  return res2
+            "version": "https://jsonfeed.org/version/1",
+            "title": "My Amazon Mobile Feed",
+            "searchURL": searchURL,
+            "searchQuery": searchQuery,
+            "items": result
+        }
+        );
+  return res1
 }
