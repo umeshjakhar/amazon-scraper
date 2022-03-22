@@ -152,53 +152,56 @@ export default async function searchProducts(query, host) {
     }
   }
 
-  function json2xml(o, tab) {
-     var toXml = function(v, name, ind) {
-        var xml = "";
-        if (v instanceof Array) {
-           for (var i=0, n=v.length; i<n; i++)
-              xml += ind + toXml(v[i], name, ind+"\t") + "\n";
-        }
-        else if (typeof(v) == "object") {
-           var hasChild = false;
-           xml += ind + "<" + name;
-           for (var m in v) {
-              if (m.charAt(0) == "@")
-                 xml += " " + m.substr(1) + "=\"" + v[m].toString() + "\"";
-              else
-                 hasChild = true;
-           }
-           xml += hasChild ? ">" : "/>";
-           if (hasChild) {
-              for (var m in v) {
-                 if (m == "#text")
-                    xml += v[m];
-                 else if (m == "#cdata")
-                    xml += "<![CDATA[" + v[m] + "]]>";
-                 else if (m.charAt(0) != "@")
-                    xml += toXml(v[m], m, ind+"\t");
-              }
-              xml += (xml.charAt(xml.length-1)=="\n"?ind:"") + "</" + name + ">";
-           }
-        }
-        else {
-           xml += ind + "<" + name + ">" + v.toString() +  "</" + name + ">";
-        }
-        return xml;
-     }, xml="";
-     for (var m in o)
-        xml += toXml(o[m], m, "");
-     return tab ? xml.replace(/\t/g, tab) : xml.replace(/\t|\n/g, "");
-  }
 
-var res1 = JSON.stringify(
-        {
-            "version": "https://jsonfeed.org/version/1",
-            "title": "My Amazon Mobile Feed",
-            "searchURL": searchURL,
-            "searchQuery": searchQuery,
-            "items": result
+function CreateTableFromJSON(items) {
+
+        // EXTRACT VALUE FOR HTML HEADER.
+        var col = [];
+        for (var i = 0; i < items.length; i++) {
+            for (var key in items[i]) {
+                if (col.indexOf(key) === -1) {
+                    col.push(key);
+                }
+            }
         }
-        );
-  return json2xml({items:result})
+
+        // CREATE DYNAMIC TABLE.
+        var table = document.createElement("table");
+
+        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+        var tr = table.insertRow(-1);                   // TABLE ROW.
+
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // TABLE HEADER.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+        }
+
+        // ADD JSON DATA TO THE TABLE AS ROWS.
+        for (var i = 0; i < items.length; i++) {
+
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = items[i][col[j]];
+            }
+        }
+
+        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+
+       return table;
+    }
+
+//var res1 = JSON.stringify(
+//        {
+//            "version": "https://jsonfeed.org/version/1",
+//            "title": "My Amazon Mobile Feed",
+//            "searchURL": searchURL,
+//            "searchQuery": searchQuery,
+//            "items": result
+//        }
+//        );
+  return CreateTableFromJSON(result)
 }
