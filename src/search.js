@@ -200,5 +200,5 @@ var res1 = JSON.stringify(
             "items": result
         }
         );
-  return json2xml(result)
+  return json2xml({items:result})
 }
