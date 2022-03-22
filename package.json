@@ -12,6 +12,7 @@
     "license": "Apache-2.0",
     "dependencies": {
         "jsonfeed-to-rss": "^3.0.5",
+        "jstoxml": "^3.2.0",
         "wrangler": "^0.0.4"
     }
 }

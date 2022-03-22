@@ -1,6 +1,7 @@
 import fixText from "./fixtext";
 import product from "./product";
-const jsonfeedToRSS = require('jsonfeed-to-rss')
+//const jsonfeedToRSS = require('jsonfeed-to-rss');
+import { toXML } from 'jstoxml';
 
 export default async function searchProducts(query, host) {
 
@@ -167,14 +168,18 @@ export default async function searchProducts(query, host) {
 //    );
 
 
-var res2 = jsonfeedToRSS(
-        {
-            version: "https://jsonfeed.org/version/1",
-            title: "My Amazon Mobile Feed",
-            home_page_url: searchURL,
-            feed_url: searchQuery,
-            items: result
-        }
-    );
-  return res2
+//var res2 = jsonfeedToRSS(
+//        {
+//            version: "https://jsonfeed.org/version/1",
+//            title: "My Amazon Mobile Feed",
+//            home_page_url: searchURL,
+//            feed_url: searchQuery,
+//            items: result
+//        }
+//    );
+const config = {
+    indent: '    '
+};
+
+  return toXML(specs, config)
 }

@@ -76,6 +76,11 @@
     "trim-right" "^1.0.1"
     "xmlbuilder" "^15.1.1"
 
+"jstoxml@^3.2.0":
+  "integrity" "sha512-8UV4fYuOnoBlBPqJ7cLd8Lfx/xFWbHLmzWmWwccLEWgIPDiIvDXTuOsWKC36jM2WOxqQ/+j9BjgZBLCme1vMEg=="
+  "resolved" "https://registry.npmjs.org/jstoxml/-/jstoxml-3.2.0.tgz"
+  "version" "3.2.0"
+
 "lodash.get@^4.4.2":
   "integrity" "sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk="
   "resolved" "https://registry.npmjs.org/lodash.get/-/lodash.get-4.4.2.tgz"
