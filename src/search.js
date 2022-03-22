@@ -21,6 +21,7 @@ export default async function searchProducts(query, host) {
   var i,
     result = [];
   for (i = 1; i < all_product.length; i++) {
+//for (i = 1; i < 2; i++) {
     /* (type 1) */
     try {
       var product_link =
@@ -94,6 +95,7 @@ export default async function searchProducts(query, host) {
     );
 
     for (i = 1; i < all_product.length; i++) {
+//    for (i = 1; i < 2; i++) {
       try {
         var product_link =
           "https://www.amazon.in" +
@@ -153,34 +155,25 @@ export default async function searchProducts(query, host) {
     }
   }
 
-
-  return jsonfeedToRSS(JSON.stringify(
-    {
-//      status: true,
-//      total_result: ,
-//      query: searchQuery,
-//      fetch_from: searchURL,
-        "version":"https://jsonfeed.org/version/1",
-        "title":"Amazon Scraper",
-        "home_page_url":"https://amazon-scraper.umeshjakhar.workers.dev/",
-        "feed_url":"https://amazon-scraper.umeshjakhar.workers.dev/search/",
-        "description": "",
-        "next_url":"https://amazon-scraper.umeshjakhar.workers.dev/search/"+(parseInt(searchQuery)+1),
-        "icon":"",
-        "author":{
-           "name":"",
-           "url":"",
-           "avatar":""
-        },
-        "_itunes":{
-           "about":"",
-           "owner": {
-             "email": ""
-           },
-           "image": "",
-           "category": "",
-           "subcategory": ""
-        },
-        "items":result
-    }));
+//var res1 = jsonfeedToRSS(
+//JSON.stringify(
+//        {
+//            version: "https://jsonfeed.org/version/1",
+//            title: "My Amazon Mobile Feed",
+//            home_page_url: searchURL,
+//            feed_url: searchQuery,
+//            items: result
+//        }
+//        )
+//    );
+var res2 = jsonfeedToRSS(
+        {
+            version: "https://jsonfeed.org/version/1",
+            title: "My Amazon Mobile Feed",
+            home_page_url: searchURL,
+            feed_url: searchQuery,
+            items: result
+        }
+    );
+  return res2
 }
