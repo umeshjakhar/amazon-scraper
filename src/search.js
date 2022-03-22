@@ -167,20 +167,20 @@ export default async function searchProducts(query, host) {
 //        )
 //    );
 
-
-//var res2 = jsonfeedToRSS(
-//        {
-//            version: "https://jsonfeed.org/version/1",
-//            title: "My Amazon Mobile Feed",
-//            home_page_url: searchURL,
-//            feed_url: searchQuery,
-//            items: result
-//        }
-//    );
 const config = {
-    header:true,
     indent: '    '
 };
+var res2 = toXML(
+        {
+            version: "https://jsonfeed.org/version/1",
+            title: "My Amazon Mobile Feed",
+            home_page_url: searchURL,
+            feed_url: searchQuery,
+            items: result
+        },
+        config
+    );
 
-  return toXML(result, config)
+
+  return res2
 }
