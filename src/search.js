@@ -1,5 +1,6 @@
 import fixText from "./fixtext";
 import product from "./product";
+const jsonfeedToRSS = require('jsonfeed-to-rss')
 
 export default async function searchProducts(query, host) {
 
@@ -152,7 +153,7 @@ export default async function searchProducts(query, host) {
     }
   }
 
-  return JSON.stringify(
+  return jsonfeedToRSS(JSON.stringify(
     {
       status: true,
       total_result: result.length,
@@ -162,6 +163,6 @@ export default async function searchProducts(query, host) {
     },
     null,
     2
-  );
+  ));
 
 }
