@@ -154,7 +154,6 @@ export default async function searchProducts(query, host) {
       } catch (err) {}
     }
   }
-
 //var res1 = jsonfeedToRSS(
 //JSON.stringify(
 //        {
