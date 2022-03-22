@@ -227,6 +227,7 @@ function CreateTableFromJSON(items) {
           <p id="showData">` + CreateTableFromJSON(result) +
 
           `</p>
-          </body>`;
+          </body>
+          <html>`;
 
 }
