@@ -12,9 +12,7 @@
     "license": "Apache-2.0",
     "dependencies": {
         "firebase-admin": "^10.0.2",
-        "html-tablify": "^2.0.3",
-        "jsonfeed-to-rss": "^3.0.5",
-        "jstoxml": "^3.2.0",
+        "html-tablify": "^1.1.1",
         "wrangler": "^0.0.4"
     }
 }
