@@ -1,10 +1,11 @@
 name = "amazon-scraper"
 type = "webpack"
-account_id = ""
+account_id = "c462a7bcb7dd0bf5eeedb2144b2ac25a"
 workers_dev = true
-route = ""
+route = "amazon-scraper.umeshjakhar.workers.dev"
 zone_id = ""
 compatibility_date = "2021-10-31"
 kv_namespaces = [
-  { binding = "AMAZON_MOBILES", id = "9c1a62381a1441b4b6808d81f9cc84f4" }
+  { binding = "AMAZON_MOBILES", id = "9c1a62381a1441b4b6808d81f9cc84f4", preview_id = "9c1a62381a1441b4b6808d81f9cc84f4" },
+
 ]
