@@ -160,10 +160,11 @@ const product = async (query) => {
   } catch (err) {
     var product_detail = null;
   }
+
  AMAZON_MOBILES.put(query,specs);
 
  var options = {
-     data: specs
+     data: [specs]
  };
  var html_data = html_tablify.tablify(options);
  return `<!DOCTYPE html>
@@ -171,11 +172,7 @@ const product = async (query) => {
          <head>
          <title>${query}</title>
          </head>
-         <body>`
-
-        + html_data +
-
-         `</body>
+         <body>${html_data}</body>
          </html>`;
 // return JSON.stringify(specs);
 
