@@ -161,7 +161,7 @@ const product = async (query) => {
     var product_detail = null;
   }
 
- AMAZON_MOBILES.put(query,specs);
+ AMAZON_MOBILES.put(query,JSON.stringify(specs));
 
  var options = {
      data: [specs]
