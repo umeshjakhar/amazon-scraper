@@ -60,7 +60,7 @@ export default async function searchProducts(query, host) {
         specs = JSON.parse(specs);
         const asin = specs.ASIN;
 //        ref.update({asin:specs});
-          AMAZON_MOBILES.put({asin:specs});
+          AMAZON_MOBILES.put(asin,specs);
 
         result.push({
           name: fixText(
@@ -133,7 +133,7 @@ export default async function searchProducts(query, host) {
                         specs = JSON.parse(specs);
                         const asin = specs.ASIN;
 //                        ref.update({asin:specs});
-                        AMAZON_MOBILES.put({asin:specs});
+                        AMAZON_MOBILES.put(asin,specs);
           result.push({
             name: fixText(
               all_product[i]
