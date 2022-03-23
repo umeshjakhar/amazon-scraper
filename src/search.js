@@ -64,7 +64,7 @@ export default async function searchProducts(query, host) {
         path = path.replace("@@@/","");
         var specs= await product(path);
         specs = JSON.parse(specs);
-        amazonRef.set({specs.ASIN:specs});
+        amazonRef.update({specs.ASIN:specs});
         result.push({
           name: fixText(
             all_product[i]
@@ -134,7 +134,7 @@ export default async function searchProducts(query, host) {
                         path = path.replace("@@@/","");
                         var specs= await product(path);
                         specs = JSON.parse(specs);
-                        amazonRef.set({specs.ASIN:specs});
+                        amazonRef.update({specs.ASIN:specs});
           result.push({
             name: fixText(
               all_product[i]

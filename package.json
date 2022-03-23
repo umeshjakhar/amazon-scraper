@@ -11,6 +11,7 @@
     "author": "Tuhin Kanti Pal <me@thetuhin.com>",
     "license": "Apache-2.0",
     "dependencies": {
+        "firebase-admin": "^10.0.2",
         "html-tablify": "^2.0.3",
         "jsonfeed-to-rss": "^3.0.5",
         "jstoxml": "^3.2.0",
