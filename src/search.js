@@ -1,6 +1,25 @@
 import fixText from "./fixtext";
 import product from "./product";
 var html_tablify = require('html-tablify');
+var admin = require("firebase-admin");
+
+// Fetch the service account key JSON file contents
+var serviceAccount = require("mobilespoint-1595924074851-firebase-adminsdk-kp5ef-80d920b340.json");
+
+// Initialize the app with a custom auth variable, limiting the server's access
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  // The database URL depends on the location of the database
+  databaseURL: "https://mobilespoint-1595924074851-default-rtdb.firebaseio.com",
+  databaseAuthVariableOverride: {
+    uid: "my-service-worker"
+  }
+});
+
+// The app only has access as defined in the Security Rules
+var db = admin.database();
+var ref = db.ref("/mobiles");
+const amazonRef = ref.child('amazon');
 
 export default async function searchProducts(query, host) {
 
@@ -42,8 +61,10 @@ export default async function searchProducts(query, host) {
 
         var path = new URL(product_link.replace("www.amazon.in","").split("/ref=")[0]).pathname;
         path = "@@@"+path;
-        var specs= await product(path.replace("@@@/",""));
+        path = path.replace("@@@/","");
+        var specs= await product(path);
         specs = JSON.parse(specs);
+        amazonRef.set({specs.ASIN:specs});
         result.push({
           name: fixText(
             all_product[i]
@@ -108,10 +129,12 @@ export default async function searchProducts(query, host) {
         }
 
         if (!product_link.includes("/gp/slredirect/")) {
-                var path = new URL(product_link.replace("www.amazon.in","").split("/ref=")[0]).pathname;
-               path = "@@@"+path;
-               var specs= await product(path.replace("@@@/",""));
-               specs = JSON.parse(specs);
+                 var path = new URL(product_link.replace("www.amazon.in","").split("/ref=")[0]).pathname;
+                        path = "@@@"+path;
+                        path = path.replace("@@@/","");
+                        var specs= await product(path);
+                        specs = JSON.parse(specs);
+                        amazonRef.set({specs.ASIN:specs});
           result.push({
             name: fixText(
               all_product[i]
