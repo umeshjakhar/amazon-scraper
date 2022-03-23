@@ -1,19 +1,19 @@
 import fixText from "./fixtext";
 import product from "./product";
 var html_tablify = require('html-tablify');
-
-var admin = require("firebase-admin");
-
-var serviceAccount = require("./mobilespoint-1595924074851-firebase-adminsdk-kp5ef-80d920b340.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://mobilespoint-1595924074851-default-rtdb.firebaseio.com"
-});
-
-// The app only has access as defined in the Security Rules
-var db = admin.database();
-var ref = db.ref("/amazon");
+//
+//var admin = require("firebase-admin");
+//
+//var serviceAccount = require("./mobilespoint-1595924074851-firebase-adminsdk-kp5ef-80d920b340.json");
+//
+//admin.initializeApp({
+//  credential: admin.credential.cert(serviceAccount),
+//  databaseURL: "https://mobilespoint-1595924074851-default-rtdb.firebaseio.com"
+//});
+//
+//// The app only has access as defined in the Security Rules
+//var db = admin.database();
+//var ref = db.ref("/amazon");
 
 export default async function searchProducts(query, host) {
 
@@ -59,7 +59,9 @@ export default async function searchProducts(query, host) {
         var specs= await product(path);
         specs = JSON.parse(specs);
         const asin = specs.ASIN;
-        ref.update({asin:specs});
+//        ref.update({asin:specs});
+          AMAZON_MOBILES.put({asin:specs});
+
         result.push({
           name: fixText(
             all_product[i]
@@ -130,7 +132,8 @@ export default async function searchProducts(query, host) {
                         var specs= await product(path);
                         specs = JSON.parse(specs);
                         const asin = specs.ASIN;
-                        ref.update({asin:specs});
+//                        ref.update({asin:specs});
+                        AMAZON_MOBILES.put({asin:specs});
           result.push({
             name: fixText(
               all_product[i]
