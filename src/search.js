@@ -157,7 +157,17 @@ var options = {
     data: result
 };
 var html_data = html_tablify.tablify(options);
-return html_data
+return `<!DOCTYPE html>
+        <html>
+        <head>
+        <title>Page Title</title>
+        </head>
+        <body>`
+
+       + html_data +
+
+        `</body>
+        </html>`;
 
 //var res1 = JSON.stringify(
 //        {
