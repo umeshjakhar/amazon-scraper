@@ -5,6 +5,7 @@ import product from "./src/product";
 async function handleRequest(request) {
   /* Handle the incoming request */
   const headers = header(request.headers);
+
   const path = new URL(request.url).pathname; /* Get the pathname */
 
   if (request.method === "GET") {
@@ -15,7 +16,7 @@ async function handleRequest(request) {
         await search(path.replace("/search/", ""), request.headers.get("host")),
         {
           status: 200,
-          headers,
+          headers: {'Content-Type': 'text/html'}
         }
       );
     } else if (path.startsWith("/product/")) {
