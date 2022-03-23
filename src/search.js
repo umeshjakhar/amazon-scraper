@@ -1,5 +1,6 @@
 import fixText from "./fixtext";
 import product from "./product";
+var html_tablify = require('html-tablify');
 
 export default async function searchProducts(query, host) {
 
@@ -152,47 +153,11 @@ export default async function searchProducts(query, host) {
     }
   }
 
-
-function CreateTableFromJSON(items) {
-
-        // EXTRACT VALUE FOR HTML HEADER.
-        var col = [];
-        for (var i = 0; i < items.length; i++) {
-            for (var key in items[i]) {
-                if (col.indexOf(key) === -1) {
-                    col.push(key);
-                }
-            }
-        }
-
-        // CREATE DYNAMIC TABLE.
-        var table = document.createElement("table");
-
-        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
-
-        var tr = table.insertRow(-1);                   // TABLE ROW.
-
-        for (var i = 0; i < col.length; i++) {
-            var th = document.createElement("th");      // TABLE HEADER.
-            th.innerHTML = col[i];
-            tr.appendChild(th);
-        }
-
-        // ADD JSON DATA TO THE TABLE AS ROWS.
-        for (var i = 0; i < items.length; i++) {
-
-            tr = table.insertRow(-1);
-
-            for (var j = 0; j < col.length; j++) {
-                var tabCell = tr.insertCell(-1);
-                tabCell.innerHTML = items[i][col[j]];
-            }
-        }
-
-        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-
-       return table;
-    }
+var options = {
+    data: result
+};
+var html_data = html_tablify.tablify(options);
+return html_data
 
 //var res1 = JSON.stringify(
 //        {
@@ -203,31 +168,6 @@ function CreateTableFromJSON(items) {
 //            "items": result
 //        }
 //        );
-  return `<!DOCTYPE html>
-          <html>
-          <head>
-              <title>Convert JSON Data to HTML Table</title>
-              <style>
-                  th, td, p, input {
-                      font:14px Verdana;
-                  }
-                  table, th, td
-                  {
-                      border: solid 1px #DDD;
-                      border-collapse: collapse;
-                      padding: 2px 3px;
-                      text-align: center;
-                  }
-                  th {
-                      font-weight:bold;
-                  }
-              </style>
-          </head>
-          <body>
-          <p id="showData">` + CreateTableFromJSON(result) +
 
-          `</p>
-          </body>
-          <html>`;
 
 }
