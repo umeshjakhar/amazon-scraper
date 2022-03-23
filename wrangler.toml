@@ -5,3 +5,6 @@ workers_dev = true
 route = ""
 zone_id = ""
 compatibility_date = "2021-10-31"
+kv_namespaces = [
+  { binding = "AMAZON_MOBILES", id = "9c1a62381a1441b4b6808d81f9cc84f4" }
+]

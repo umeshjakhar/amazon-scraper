@@ -56,7 +56,7 @@ export default async function searchProducts(query, host) {
         var path = new URL(product_link.replace("www.amazon.in","").split("/ref=")[0]).pathname;
         path = "@@@"+path;
         path = path.replace("@@@/","");
-        var specs= await product(path);
+        var specs = await product(path);
         specs = JSON.parse(specs);
         const asin = specs.ASIN;
 //        ref.update({asin:specs});
