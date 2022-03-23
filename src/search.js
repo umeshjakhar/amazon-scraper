@@ -95,8 +95,7 @@ export default async function searchProducts(query, host) {
               .trim()
           ),
           product_link,
-          query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
-          ...specs
+          query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0]
         });
 
       }
@@ -133,7 +132,7 @@ export default async function searchProducts(query, host) {
 //                        specs = JSON.parse(specs);
 //                        const asin = specs.ASIN;
 //                        ref.update({asin:specs});
-                        AMAZON_MOBILES.put("asin","specs");
+//                        AMAZON_MOBILES.put("asin","specs");
           result.push({
             name: fixText(
               all_product[i]
@@ -167,8 +166,7 @@ export default async function searchProducts(query, host) {
                 .trim()
             ),
             product_link,
-            query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0],
-            ...specs
+            query_url: product_link.replace("www.amazon.in", host + "/product").split("/ref=")[0]
           });
         }
       } catch (err) {}

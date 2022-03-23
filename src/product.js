@@ -1,5 +1,5 @@
 import fixText from "./fixtext";
-
+var html_tablify = require('html-tablify');
 const product = async (query) => {
   const product_page = await (
     await fetch(`https://www.amazon.in/${query}`)
@@ -160,7 +160,24 @@ const product = async (query) => {
   } catch (err) {
     var product_detail = null;
   }
- return JSON.stringify(specs);
+ AMAZON_MOBILES.put(query,specs);
+
+ var options = {
+     data: specs
+ };
+ var html_data = html_tablify.tablify(options);
+ return `<!DOCTYPE html>
+         <html>
+         <head>
+         <title>${query}</title>
+         </head>
+         <body>`
+
+        + html_data +
+
+         `</body>
+         </html>`;
+// return JSON.stringify(specs);
 
 //  return JSON.stringify(
 //    {
