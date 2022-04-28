@@ -16,7 +16,8 @@ async function handleRequest(request) {
         await search(path.replace("/search/", ""), request.headers.get("host")),
         {
           status: 200,
-          headers: {'Content-Type': 'text/html'}
+          headers
+//          headers: {'Content-Type': 'text/html'}
         }
       );
     } else if (path.startsWith("/product/")) {
