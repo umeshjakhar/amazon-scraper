@@ -185,15 +185,20 @@ export default async function searchProducts(query, host) {
 //         <body>${html_data}</body>
 //         </html>`;
 
-return JSON.stringify(
-        {
-            "version": "https://jsonfeed.org/version/1",
-            "title": "My Amazon Mobile Feed",
-            "searchURL": searchURL,
-            "searchQuery": searchQuery,
-            "items": result
-        }
-        );
+//return JSON.stringify(
+//        {
+//            "version": "https://jsonfeed.org/version/1",
+//            "title": "My Amazon Mobile Feed",
+//            "searchURL": searchURL,
+//            "searchQuery": searchQuery,
+//            "items": result
+//        }
+        return JSON.stringify({
+                total_result: result.length,
+                query: query,
+                fetch_from: searchURL,
+                result
+            }, null, 2)
 
 
 }
