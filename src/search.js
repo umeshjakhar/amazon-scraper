@@ -173,27 +173,27 @@ export default async function searchProducts(query, host) {
     }
   }
 
-var options = {
-    data: result
-};
-var html_data = html_tablify.tablify(options);
-return `<!DOCTYPE html>
-         <html>
-         <head>
-         <title>${query}</title>
-         </head>
-         <body>${html_data}</body>
-         </html>`;
+//var options = {
+//    data: result
+//};
+//var html_data = html_tablify.tablify(options);
+//return `<!DOCTYPE html>
+//         <html>
+//         <head>
+//         <title>${query}</title>
+//         </head>
+//         <body>${html_data}</body>
+//         </html>`;
 
-//var res1 = JSON.stringify(
-//        {
-//            "version": "https://jsonfeed.org/version/1",
-//            "title": "My Amazon Mobile Feed",
-//            "searchURL": searchURL,
-//            "searchQuery": searchQuery,
-//            "items": result
-//        }
-//        );
+return JSON.stringify(
+        {
+            "version": "https://jsonfeed.org/version/1",
+            "title": "My Amazon Mobile Feed",
+            "searchURL": searchURL,
+            "searchQuery": searchQuery,
+            "items": result
+        }
+        );
 
 
 }
